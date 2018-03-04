@@ -101,3 +101,63 @@ CREATE TABLE TipoDocumento (
 
 );
 
+
+-------- TABLA LIBRO-------
+
+CREATE TABLE Libro(
+   IdLibro NUMBER(7) primary key,
+   Titulo VARCHAR2(50) NOT NULL,
+   ISBN  VARCHAR2(13) primary key,
+   FechaPublicacion DATE NOT NULL,
+   NumEjemplares NUMBER(2) NOT NULL,
+   Descripcion VARCHAR2(300),
+   Paginas NUMBER(4),
+   Edicion VARCHAR2(10),
+   IdUbicacion NUMBER(3),
+   IdEstado NUMBER(2),
+   IdTipoDocumento NUMBER(3)
+   Codigo NUMBER(3),
+   CodigoEspecial NUMBER(3),
+
+   CONSTRAINT fk_Ubicacion_Libro FOREIGN KEY (IdUbicacion) REFERENCES Ubicacion(IdUbicacion),
+   CONSTRAINT fk_Estado_Libro FOREIGN KEY (IdEstado) REFERENCES Ubicacion(IdEstado),
+   CONSTRAINT fk_TipoDocumento_Libro FOREIGN KEY (IdTipoDocumento) REFERENCES TipoDocumento(IdTipoDocumento),
+   CONSTRAINT fk_CodigoGeneral_Libro FOREIGN KEY (Codigo) REFERENCES CodigoGeneral(CodigoGeneral),
+   CONSTRAINT fk_CodigoEspecial_Libro FOREIGN KEY (CodigoEspecial) REFERENCES CodigoEspecial(CodigoEspecial)
+);
+
+
+------ TABLA DETALLE LIBRO---------
+
+CREATE TABLE DetalleLibro(
+    
+    IdDetalleLibro NUMBER(6) primary key,
+    IdAutor NUMBER(5),
+    IdLibro NUMBER(6),
+    ISBN VARCHAR2(13),
+    IdEditorial NUMBER(3),
+
+    CONSTRAINT fk_Autor_DetalleLibro FOREIGN KEY (IdAutor) REFERENCES Autor(IdAutor),
+    CONSTRAINT fk_libro_DetalleLibro FOREIGN KEY (Idlibro) REFERENCES Libro(IdLibro),
+    CONSTRAINT fk_Libro_DetalleLibro FOREIGN KEY (ISBN) REFERENCES Libro(ISBN),
+    CONSTRAINT fk_Editorial_DetalleLibro FOREIGN KEY (IdEditorial) REFERENCES Editorial(IdEditorial)
+);
+
+---------  TABLA PRESTAMO -----------
+
+CREATE TABLE Prestamo(
+  
+  IdPrestamo NUMBER(6) primary key,
+  FechaPrestamo DATE,
+  FechaDevolucion DATE,
+  Estado VARCHAR2(10),
+  IdBibliotecario NUMBER(4),
+  IdUsuario NUMBER(4),
+  Identificacion VARCHAR2(20),
+  Cantidad NUMBER(2),
+
+  CONSTRAINT fk_Bibliotecario_Prestamo FOREIGN KEY (IdBibliotecario) REFERENCES Bibliotecario(IdBibliotecario),
+  CONSTRAINT fk_Usuario_Prestamo FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario),
+  CONSTRAINT fk_Usuario_Prestamo FOREIGN KEY (Identificacion) REFERENCES Usuario(Identificacion)
+);
+
