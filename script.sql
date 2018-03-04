@@ -70,3 +70,34 @@ CREATE TABLE CategoriaEspecial (
     REFERENCES CategoriaGeneral (CodigoGeneral);
     
 );
+
+--Tabla DetallePrestamo
+CREATE TABLE DetallePrestamo(
+	IdDetallePrestamo NUMBER(6) PRIMARY KEY,
+	IdPrestamo NUMBER(6) NOT NULL,
+	IdLibro NUMBER(7) NOT NULL
+
+CONSTRAINT FK_DetallePrestamo_Prestamo
+FOREIGN KEY (IdPrestamo)
+REFERENCES Prestamo (IdPrestamo)
+
+CONSTRAINT FK_DetallePrestamo_Libro
+FOREIGN KEY (IdLibro)
+REFERENCES Libro (IdLibro)
+
+);
+
+--Tabla Estado
+CREATE TABLE Estado(
+	IdEstado NUMBER(2)PRIMARY KEY,
+	Estado VARCHAR2(20)
+
+);
+
+--Tabla TipoDocumento
+CREATE TABLE TipoDocumento (
+	IdTipoDocumen NUMBER(2) PRIMARY KEY,
+	Nombre VARCHAR2(10) NOT NULL
+
+);
+
