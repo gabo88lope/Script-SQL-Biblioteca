@@ -5,7 +5,7 @@
 
 --Tabla Usuario--
 CREATE TABLE Usuario (
-	IdUsuario number(5) PRIMARY KEY, 
+	IdUsuario NUMBER(5) PRIMARY KEY, 
 	Nombre VARCHAR2(20) NOT NULL,
 	Apellido VARCHAR2 (20) NOT NULL, 
 	Identificacion VARCHAR2 (20) NOT NULL,
@@ -16,14 +16,14 @@ CREATE TABLE Usuario (
 
 --Tabla Ubicación--
 CREATE TABLE Ubicacion (
-	IdUbicacion number(3) PRIMARY KEY,
+	IdUbicacion NUMBER(3) PRIMARY KEY,
 	Nombre VARCHAR2(20) NOT NULL,
 	
 );
 
 --Tabla Editorial--
 CREATE TABLE Editorial (
-	IdEditorial number(3) PRIMARY KEY,
+	IdEditorial NUMBER(3) PRIMARY KEY,
 	Nombre VARCHAR(30) NOT NULL,
 	IdUbicacion NUMBER(3)NOT NULL
 	
@@ -35,35 +35,35 @@ CREATE TABLE Editorial (
 
 -- TABLA Autor
 CREATE TABLE Autor (
-    IdAutor number(5) PRIMARY KEY,
+    IdAutor NUMBER(5) PRIMARY KEY,
     Nombre VARCHAR2(20)  NOT NULL,
     Apellido VARCHAR2(20)  NOT NULL,
-    Sexo number(10)  NULL,
-    Nacionalidad varchar2(15)  NULL,
-    FechaNacimiento date  NULL,
+    Sexo NUMBER(10)  NULL,
+    Nacionalidad VARCHAR2(15)  NULL,
+    FechaNacimiento DATE  NULL,
     
 );
 
 -- TABLA Bibliotecario
 CREATE TABLE Bibliotecario (
-    IdBibliotecario number(3)  PRIMARY KEY,
-    Nombre varchar2(20)  NOT NULL,
-    Apellido varchar2(20)  NOT NULL,
+    IdBibliotecario NUMBER(3)  PRIMARY KEY,
+    Nombre VARCHAR2(20)  NOT NULL,
+    Apellido VARCHAR2(20)  NOT NULL,
     
 );
 
 -- TABLA CategoriaGeneral
 CREATE TABLE CategoriaGeneral (
-    CodigoGeneral number(3)  PRIMARY KEY,
-    Nombre varchar2(50)  NOT NULL,
+    CodigoGeneral NUMBER(3)  PRIMARY KEY,
+    Nombre VARCHAR(50)  NOT NULL,
     
 );
 
 -- TABLA CategoriaEspecial
 CREATE TABLE CategoriaEspecial (
-    CodigoEspecial number(3)  PRIMARY KEY,
-    Nombre varchar2(50)  NOT NULL,
-    CodigoGeneral number(3)  NOT NULL
+    CodigoEspecial NUMBER(3)  PRIMARY KEY,
+    Nombre VARCHAR2(50)  NOT NULL,
+    CodigoGeneral NUMBER(3)  NOT NULL
 	
 	CONSTRAINT FK_CatEspecial_CatGeneral
     FOREIGN KEY (CodigoGeneral)
