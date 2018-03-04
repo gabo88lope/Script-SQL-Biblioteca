@@ -2,6 +2,7 @@
 --Script para creacion de tablas en la BD
 --Por Gabriel,Bryan,Nelson y Leonardo
 --Creado sábado, 4 de marzo de 2018
+-- Universidad Centroamericana ISI
 
 --Tabla Usuario--
 CREATE TABLE Usuario (
@@ -148,9 +149,9 @@ CREATE TABLE DetalleLibro(
 CREATE TABLE Prestamo(
   
   IdPrestamo NUMBER(6) primary key,
-  FechaPrestamo DATE,
-  FechaDevolucion DATE,
-  Estado VARCHAR2(10),
+  FechaPrestamo DATE NOT NULL,
+  FechaDevolucion DATE NOT NULL,
+  Estado VARCHAR2(10) NOT NULL,
   IdBibliotecario NUMBER(4),
   IdUsuario NUMBER(4),
   Identificacion VARCHAR2(20),
