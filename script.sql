@@ -36,8 +36,8 @@ CREATE TABLE Editorial (
 -- TABLA Autor
 CREATE TABLE Autor (
     IdAutor number(5) PRIMARY KEY,
-    Nombre number(20)  NOT NULL,
-    Apellido number(20)  NOT NULL,
+    Nombre VARCHAR2(20)  NOT NULL,
+    Apellido VARCHAR2(20)  NOT NULL,
     Sexo number(10)  NULL,
     Nacionalidad varchar2(15)  NULL,
     FechaNacimiento date  NULL,
