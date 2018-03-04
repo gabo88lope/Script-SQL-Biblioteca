@@ -3,6 +3,28 @@
 --Por Gabriel,Bryan,Nelson y Leonardo
 --Creado sábado, 4 de marzo de 2018
 
+--Tabla Usuario--
+CREATE TABLE Usuario
+(IdUsuario number(5) PRIMARY KEY, 
+Nombre VARCHAR2(20) NOT NULL,
+Apellido VARCHAR2 (20) NOT NULL, 
+Identificacion VARCHAR2 (20) NOT NULL,
+Sexo VARCHAR2(15), 
+Nacionalidad VARCHAR2(20));
+
+--Tabla Ubicación--
+CREATE TABLE Ubicacion
+(IdUbicacion number(3) PRIMARY KEY,
+Nombre VARCHAR2(20) NOT NULL);
+
+--Tabla Editorial--
+CREATE TABLE Editorial
+(IdEditorial number(3) PRIMARY KEY,
+Nombre VARCHAR(30) NOT NULL,
+CONSTRAINT FK_Editorial_Ubicacion 
+FOREIGN KEY (IdUbicacion)
+REFERENCES Ubicacion (IdUbicacion));
+
 -- TABLA Autor
 CREATE TABLE Autor (
     IdAutor number(5) PRIMARY KEY,
