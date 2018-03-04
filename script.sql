@@ -10,14 +10,14 @@ CREATE TABLE Usuario (
 	Apellido VARCHAR2 (20) NOT NULL, 
 	Identificacion VARCHAR2 (20) NOT NULL,
 	Sexo VARCHAR2(15), 
-	Nacionalidad VARCHAR2(20)
+	Nacionalidad VARCHAR2(20),
 	
 );
 
 --Tabla Ubicación--
 CREATE TABLE Ubicacion (
 	IdUbicacion number(3) PRIMARY KEY,
-	Nombre VARCHAR2(20) NOT NULL)
+	Nombre VARCHAR2(20) NOT NULL,
 	
 );
 
