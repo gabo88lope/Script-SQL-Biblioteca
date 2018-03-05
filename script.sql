@@ -1,203 +1,159 @@
 --Biblioteca
 --Script para creacion de tablas en la BD
 --Por Gabriel,Bryan,Nelson y Leonardo
---Creado sábado, 4 de marzo de 2018
+--Creado sábado,4 de marzo de 2018
 --Universidad Centroamericana ISI
 
 -- Tabla Usuario
-CREATE TABLE Usuario (
-
-	IdUsuario NUMBER(5) PRIMARY KEY, 
-	Nombre VARCHAR2(20) NOT NULL,
-	Apellido VARCHAR2 (20) NOT NULL, 
-	Identificacion VARCHAR2 (20) NOT NULL,
-	Sexo VARCHAR2(15), 
-	Nacionalidad VARCHAR2(20)
-	
+CREATE TABLE usuario (
+    idusuario        NUMBER(5) PRIMARY KEY,
+    nombre           VARCHAR2(20) NOT NULL,
+    apellido         VARCHAR2(20) NOT NULL,
+    identificacion   VARCHAR2(20) NOT NULL,
+    sexo             VARCHAR2(15),
+    nacionalidad     VARCHAR2(20)
 );
 
 -- Tabla Ubicación
 
-CREATE TABLE Ubicacion (
-
-	IdUbicacion NUMBER(3) PRIMARY KEY,
-	Nombre VARCHAR2(20) NOT NULL
-	
+CREATE TABLE ubicacion (
+    idubicacion   NUMBER(3) PRIMARY KEY,
+    nombre        VARCHAR2(20) NOT NULL
 );
 
 -- TABLA Autor
-CREATE TABLE Autor (
 
-    IdAutor NUMBER(5) PRIMARY KEY,
-    Nombre VARCHAR2(20)  NOT NULL,
-    Apellido VARCHAR2(20)  NOT NULL,
-    Sexo NUMBER(10)  NULL,
-    Nacionalidad VARCHAR2(15)  NULL,
-    FechaNacimiento DATE  NULL
-    
+CREATE TABLE autor (
+    idautor           NUMBER(5) PRIMARY KEY,
+    nombre            VARCHAR2(20) NOT NULL,
+    apellido          VARCHAR2(20) NOT NULL,
+    sexo              NUMBER(10) NULL,
+    nacionalidad      VARCHAR2(15) NULL,
+    fechanacimiento   DATE NULL
 );
 
 -- TABLA Bibliotecario
-CREATE TABLE Bibliotecario (
 
-    IdBibliotecario NUMBER(3)  PRIMARY KEY,
-    Nombre VARCHAR2(20)  NOT NULL,
-    Apellido VARCHAR2(20)  NOT NULL
-    
+CREATE TABLE bibliotecario (
+    idbibliotecario   NUMBER(3) PRIMARY KEY,
+    nombre            VARCHAR2(20) NOT NULL,
+    apellido          VARCHAR2(20) NOT NULL
 );
 
-
 -- Tabla Estado
-CREATE TABLE Estado(
 
-	IdEstado NUMBER(2) PRIMARY KEY,
-	Estado VARCHAR2(20)
-
+CREATE TABLE estado (
+    idestado   NUMBER(2) PRIMARY KEY,
+    estado     VARCHAR2(20)
 );
 
 -- Tabla TipoDocumento
-CREATE TABLE TipoDocumento (
 
-	IdTipoDocumento NUMBER(2) PRIMARY KEY,
-	Nombre VARCHAR2(10) NOT NULL
-
+CREATE TABLE tipodocumento (
+    idtipodocumento   NUMBER(2) PRIMARY KEY,
+    nombre            VARCHAR2(10) NOT NULL
 );
 
 -- TABLA CategoriaGeneral
-CREATE TABLE CategoriaGeneral (
 
-    CodigoGeneral NUMBER(3)  PRIMARY KEY,
-    Nombre VARCHAR(50)  NOT NULL
-    
+CREATE TABLE categoriageneral (
+    codigogeneral   NUMBER(3) PRIMARY KEY,
+    nombre          VARCHAR(50) NOT NULL
 );
 
 -- TABLA CategoriaEspecial
-CREATE TABLE CategoriaEspecial (
 
-    CodigoEspecial NUMBER(3)  PRIMARY KEY,
-    Nombre VARCHAR2(50)  NOT NULL,
-    CodigoGeneral NUMBER(3)  NOT NULL
-	
-	CONSTRAINT FK_CatEspecial_CatGeneral
-    REFERENCES CategoriaGeneral (CodigoGeneral)
-    
+CREATE TABLE categoriaespecial (
+    codigoespecial   NUMBER(3) PRIMARY KEY,
+    nombre           VARCHAR2(50) NOT NULL,
+    codigogeneral    NUMBER(3) NOT NULL
+        CONSTRAINT fk_catespecial_catgeneral
+            REFERENCES categoriageneral ( codigogeneral )
 );
 
 -- Tabla Editorial
-CREATE TABLE Editorial (
 
-	IdEditorial NUMBER(3) PRIMARY KEY,
-	Nombre VARCHAR(30) NOT NULL,
-	IdUbicacion NUMBER(3)NOT NULL
-	
-	CONSTRAINT FK_Editorial_Ubicacion 
-	REFERENCES Ubicacion (IdUbicacion)
-
+CREATE TABLE editorial (
+    ideditorial   NUMBER(3) PRIMARY KEY,
+    nombre        VARCHAR(30) NOT NULL,
+    idubicacion   NUMBER(3) NOT NULL
+        CONSTRAINT fk_editorial_ubicacion
+            REFERENCES ubicacion ( idubicacion )
 );
 
 -- TABLA LIBRO
 
-CREATE TABLE Libro(
-
-   IdLibro NUMBER(7),
-   ISBN  VARCHAR2(13),
-   
-   CONSTRAINT PK_Libro PRIMARY KEY (IdLibro,ISBN),
-   
-   Titulo VARCHAR2(50) NOT NULL,
-   FechaPublicacion DATE NOT NULL,
-   Edicion VARCHAR2(10),
-   Descripcion VARCHAR2(300),
-   Paginas NUMBER(4),
-   NumEjemplares NUMBER(2) NOT NULL,
-   IdUbicacion NUMBER(3) NOT NULL
-   
-   CONSTRAINT fk_Ubicacion_Libro 
-   REFERENCES Ubicacion(IdUbicacion),
-   
-   IdEstado NUMBER(2) NOT NULL
-   
-   CONSTRAINT fk_Estado_Libro 
-   REFERENCES Estado(IdEstado),
-   
-   IdTipoDocumento NUMBER(3) NOT NULL
-   
-   CONSTRAINT fk_TipoDocumento_Libro 
-   REFERENCES TipoDocumento(IdTipoDocumento),
-   
-   Codigo NUMBER(3) NOT NULL
-   
-   CONSTRAINT fk_CodigoGeneral_Libro  
-   REFERENCES CategoriaGeneral(CodigoGeneral),
-   
-   CodigoEspecial NUMBER(3) NOT NULL
-   
-   CONSTRAINT fk_CodigoEspecial_Libro 
-   REFERENCES CategoriaEspecial(CodigoEspecial)
+CREATE TABLE libro (
+    idlibro            NUMBER(7),
+    isbn               VARCHAR2(13),
+    CONSTRAINT pk_libro PRIMARY KEY ( idlibro,isbn ),
+    titulo             VARCHAR2(50) NOT NULL,
+    fechapublicacion   DATE NOT NULL,
+    edicion            VARCHAR2(10),
+    descripcion        VARCHAR2(300),
+    paginas            NUMBER(4),
+    numejemplares      NUMBER(2) NOT NULL,
+    idubicacion        NUMBER(3) NOT NULL
+        CONSTRAINT fk_ubicacion_libro
+            REFERENCES ubicacion ( idubicacion ),
+    idestado           NUMBER(2) NOT NULL
+        CONSTRAINT fk_estado_libro
+            REFERENCES estado ( idestado ),
+    idtipodocumento    NUMBER(3) NOT NULL
+        CONSTRAINT fk_tipodocumento_libro
+            REFERENCES tipodocumento ( idtipodocumento ),
+    codigo             NUMBER(3) NOT NULL
+        CONSTRAINT fk_codigogeneral_libro
+            REFERENCES categoriageneral ( codigogeneral ),
+    codigoespecial     NUMBER(3) NOT NULL
+        CONSTRAINT fk_codigoespecial_libro
+            REFERENCES categoriaespecial ( codigoespecial )
 );
-
 
 -- TABLA PRESTAMO
 
-CREATE TABLE Prestamo(
-  
-  IdPrestamo NUMBER(6) PRIMARY KEY,
-  FechaPrestamo DATE NOT NULL,
-  FechaDevolucion DATE NOT NULL,
-  Cantidad NUMBER(2) NOT NULL,
-  Estado VARCHAR2(10) NOT NULL,
-  IdUsuario NUMBER(4) NOT NULL
-  
-  CONSTRAINT fk_Usuario_Prestamo 
-  REFERENCES Usuario(IdUsuario),
-  
-  Identificacion VARCHAR2(20) NOT NULL,
-  IdBibliotecario NUMBER(4) NOT NULL
-  
-  CONSTRAINT fk_Bibliotecario_Prestamo 
-  REFERENCES Bibliotecario(IdBibliotecario)
-  
-  
+CREATE TABLE prestamo (
+    idprestamo        NUMBER(6) PRIMARY KEY,
+    fechaprestamo     DATE NOT NULL,
+    fechadevolucion   DATE NOT NULL,
+    cantidad          NUMBER(2) NOT NULL,
+    estado            VARCHAR2(10) NOT NULL,
+    idusuario         NUMBER(4) NOT NULL
+        CONSTRAINT fk_usuario_prestamo
+            REFERENCES usuario ( idusuario ),
+    identificacion    VARCHAR2(20) NOT NULL,
+    idbibliotecario   NUMBER(4) NOT NULL
+        CONSTRAINT fk_bibliotecario_prestamo
+            REFERENCES bibliotecario ( idbibliotecario )
 );
 
 -- TABLA DETALLE LIBRO
 
-CREATE TABLE DetalleLibro(
-    
-    IdDetalleLibro NUMBER(6) primary key,
-    IdLibro NUMBER(6) NOT NULL,	
-    ISBN VARCHAR2(13) NOT NULL,
-	
-	CONSTRAINT fk_Libro_DetalleLibro
-    FOREIGN KEY (IdLibro,ISBN)
-	REFERENCES Libro(Idlibro,ISBN),
-	
-	IdAutor NUMBER(5) NOT NULL
-	
-	CONSTRAINT fk_Autor_DetalleLibro 
-	REFERENCES Autor(IdAutor),
-	
-    IdEditorial NUMBER(3) NOT NULL
-
-    CONSTRAINT fk_Editorial_DetalleLibro 
-	REFERENCES Editorial(IdEditorial)
+CREATE TABLE detallelibro (
+    iddetallelibro   NUMBER(6) PRIMARY KEY,
+    idlibro          NUMBER(6) NOT NULL,
+    isbn             VARCHAR2(13) NOT NULL,
+    CONSTRAINT fk_libro_detallelibro FOREIGN KEY ( idlibro,isbn )
+        REFERENCES libro ( idlibro,isbn ),
+    idautor          NUMBER(5) NOT NULL
+        CONSTRAINT fk_autor_detallelibro
+            REFERENCES autor ( idautor ),
+    ideditorial      NUMBER(3) NOT NULL
+        CONSTRAINT fk_editorial_detallelibro
+            REFERENCES editorial ( ideditorial )
 );
 
 -- Tabla DetallePrestamo
-CREATE TABLE DetallePrestamo(
 
-	IdDetallePrestamo NUMBER(6) PRIMARY KEY,
-	IdPrestamo NUMBER(6) NOT NULL
-	
-	CONSTRAINT FK_DetallePrestamo_Prestamo
-	REFERENCES Prestamo (IdPrestamo),
-	
-	IdLibro NUMBER(6) NOT NULL,	
-    ISBN VARCHAR2(13) NOT NULL,
-	
-	CONSTRAINT fk_Libro_DetallePrestamo
-    FOREIGN KEY (IdLibro,ISBN)
-	REFERENCES Libro(Idlibro,ISBN)
-
+CREATE TABLE detalleprestamo (
+    iddetalleprestamo   NUMBER(6) PRIMARY KEY,
+    idprestamo          NUMBER(6) NOT NULL
+        CONSTRAINT fk_detalleprestamo_prestamo
+            REFERENCES prestamo ( idprestamo ),
+    idlibro             NUMBER(6) NOT NULL,
+    isbn                VARCHAR2(13) NOT NULL,
+    CONSTRAINT fk_libro_detalleprestamo FOREIGN KEY ( idlibro,isbn )
+        REFERENCES libro ( idlibro,isbn )
 );
+
 
