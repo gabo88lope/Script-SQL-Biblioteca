@@ -1,0 +1,13 @@
+DROP TABLE AUTOR  cascade constraints PURGE;
+DROP TABLE BIBLIOTECARIO cascade constraints PURGE;
+DROP TABLE CATEGORIAESPECIAL cascade constraints PURGE;
+DROP TABLE CATEGORIAGENERAL cascade constraints PURGE;
+DROP TABLE EDITORIAL cascade constraints PURGE;
+DROP TABLE ESTADO cascade constraints PURGE;
+DROP TABLE TIPODOCUMENTO cascade constraints PURGE;
+DROP TABLE USUARIO cascade constraints PURGE;
+DROP TABLE PRESTAMO cascade constraints PURGE;
+DROP TABLE UBICACION cascade constraints PURGE;
+DROP TABLE LIBRO cascade constraints PURGE;
+DROP TABLE DETALLELIBRO cascade constraints PURGE;
+DROP TABLE DETALLEPRESTAMO cascade constraints PURGE;

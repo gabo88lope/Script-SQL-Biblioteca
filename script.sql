@@ -50,7 +50,7 @@ CREATE TABLE Bibliotecario (
 -- Tabla Estado
 CREATE TABLE Estado(
 
-	IdEstado NUMBER(2)PRIMARY KEY,
+	IdEstado NUMBER(2) PRIMARY KEY,
 	Estado VARCHAR2(20)
 
 );
@@ -79,7 +79,7 @@ CREATE TABLE CategoriaEspecial (
     CodigoGeneral NUMBER(3)  NOT NULL
 	
 	CONSTRAINT FK_CatEspecial_CatGeneral
-    REFERENCES CategoriaGeneral (CodigoGeneral);
+    REFERENCES CategoriaGeneral (CodigoGeneral)
     
 );
 
@@ -99,8 +99,11 @@ CREATE TABLE Editorial (
 
 CREATE TABLE Libro(
 
-   IdLibro NUMBER(7) PRIMARY KEY,
-   ISBN  VARCHAR2(13) PRIMARY KEY,
+   IdLibro NUMBER(7),
+   ISBN  VARCHAR2(13),
+   
+   CONSTRAINT PK_Libro PRIMARY KEY (IdLibro,ISBN),
+   
    Titulo VARCHAR2(50) NOT NULL,
    FechaPublicacion DATE NOT NULL,
    Edicion VARCHAR2(10),
@@ -115,7 +118,7 @@ CREATE TABLE Libro(
    IdEstado NUMBER(2) NOT NULL
    
    CONSTRAINT fk_Estado_Libro 
-   REFERENCES Ubicacion(IdEstado),
+   REFERENCES Estado(IdEstado),
    
    IdTipoDocumento NUMBER(3) NOT NULL
    
@@ -125,12 +128,12 @@ CREATE TABLE Libro(
    Codigo NUMBER(3) NOT NULL
    
    CONSTRAINT fk_CodigoGeneral_Libro  
-   REFERENCES CodigoGeneral(CodigoGeneral),
+   REFERENCES CategoriaGeneral(CodigoGeneral),
    
    CodigoEspecial NUMBER(3) NOT NULL
    
    CONSTRAINT fk_CodigoEspecial_Libro 
-   REFERENCES CodigoEspecial(CodigoEspecial)
+   REFERENCES CategoriaEspecial(CodigoEspecial)
 );
 
 
@@ -148,11 +151,7 @@ CREATE TABLE Prestamo(
   CONSTRAINT fk_Usuario_Prestamo 
   REFERENCES Usuario(IdUsuario),
   
-  Identificacion VARCHAR2(20) NOT NULL
-  
-  CONSTRAINT fk_Usuario_Prestamo 
-  REFERENCES Usuario(Identificacion),
-
+  Identificacion VARCHAR2(20) NOT NULL,
   IdBibliotecario NUMBER(4) NOT NULL
   
   CONSTRAINT fk_Bibliotecario_Prestamo 
@@ -166,15 +165,12 @@ CREATE TABLE Prestamo(
 CREATE TABLE DetalleLibro(
     
     IdDetalleLibro NUMBER(6) primary key,
-    IdLibro NUMBER(6) NOT NULL
+    IdLibro NUMBER(6) NOT NULL,	
+    ISBN VARCHAR2(13) NOT NULL,
 	
-	CONSTRAINT fk_libro_DetalleLibro 
-	REFERENCES Libro(IdLibro),
-	
-    ISBN VARCHAR2(13) NOT NULL
-	
-	CONSTRAINT fk_Libro_DetalleLibro 
-	REFERENCES Libro(ISBN),
+	CONSTRAINT fk_Libro_DetalleLibro
+    FOREIGN KEY (IdLibro,ISBN)
+	REFERENCES Libro(Idlibro,ISBN),
 	
 	IdAutor NUMBER(5) NOT NULL
 	
@@ -196,10 +192,12 @@ CREATE TABLE DetallePrestamo(
 	CONSTRAINT FK_DetallePrestamo_Prestamo
 	REFERENCES Prestamo (IdPrestamo),
 	
-	IdLibro NUMBER(7) NOT NULL
+	IdLibro NUMBER(6) NOT NULL,	
+    ISBN VARCHAR2(13) NOT NULL,
 	
-	CONSTRAINT FK_DetallePrestamo_Libro
-	REFERENCES Libro (IdLibro)
+	CONSTRAINT fk_Libro_DetallePrestamo
+    FOREIGN KEY (IdLibro,ISBN)
+	REFERENCES Libro(Idlibro,ISBN)
 
 );
 
