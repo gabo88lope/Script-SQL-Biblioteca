@@ -251,3 +251,31 @@ INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,nume
 INSERT INTO LIBRO (isbn,depositolegal,titulo,fechapublicacion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('968-422-216-5','M. 23.299-1990','BASIC Avanzado Tratamiento y diseño de archivos',TO_DATE('1990','YYYY'),'Libro sobre BASIC',333,2,6,3,000,005);
 INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('978-970-810-304-6','El Zahir',TO_DATE('2010','YYYY'),'4ta reimpresion','Libro de literatura de Paulo Coelho',352,10,2,1,1,860,863);
 INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('980-01-0024-5','Comprender la comunicacion',TO_DATE('1990','YYYY'),'4ta edicion','Libro sobre comunicacion',1,1,860,863);
+
+--Valores para préstamo
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(1,1, TO_DATE('12/04/2017','DD/MM/YYYY'), TO_DATE('19/04/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(2,2, TO_DATE('18/07/2017','DD/MM/YYYY'), TO_DATE('23/07/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(3,3, TO_DATE('08/08/2017','DD/MM/YYYY'),TO_DATE('12/08/2017','DD/MM/YYYY'), 2, 'Prestamo Vencido');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(4,4, TO_DATE('21/08/2017','DD/MM/YYYY'), TO_DATE('25/08/2017','DD/MM/YYYY'), 3, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(5,1, TO_DATE('17/10/2017','DD/MM/YYYY'), TO_DATE('23/10/2017','DD/MM/YYYY'), 1, 'Prestamo Vencido');
+
+--Valores para detalle_préstamo
+INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
+VALUES(1,'',1);
+INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
+VALUES(2,'',2);
+INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
+VALUES(3,'',3);
+INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
+VALUES(4,'',4);
+INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
+VALUES(5,'',5);
