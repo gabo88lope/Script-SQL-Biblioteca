@@ -243,3 +243,31 @@ INSERT INTO CATEGORIAGENERAL (CODIGOESPECIAL,NOMBRE,CODIGOGENERAL)VALUES(810,'Li
 INSERT INTO CATEGORIAGENERAL (CODIGOESPECIAL,NOMBRE,CODIGOGENERAL)VALUES(910,'Geografia & Viajes',900);
 
 --INSERT INTO LIBRO ()VALUES();
+
+--Valores para préstamo
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(1,1, TO_DATE('12/04/2017','DD/MM/YYYY'), TO_DATE('19/04/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(2,2, TO_DATE('18/07/2017','DD/MM/YYYY'), TO_DATE('23/07/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(3,3, TO_DATE('08/08/2017','DD/MM/YYYY'),TO_DATE('12/08/2017','DD/MM/YYYY'), 2, 'Prestamo Vencido');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(4,4, TO_DATE('21/08/2017','DD/MM/YYYY'), TO_DATE('25/08/2017','DD/MM/YYYY'), 3, 'En Prestamo');
+
+INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
+VALUES(5,1, TO_DATE('17/10/2017','DD/MM/YYYY'), TO_DATE('23/10/2017','DD/MM/YYYY'), 1, 'Prestamo Vencido');
+
+--Valores para detalle_préstamo
+INSERT INTO DetallePrestamo(idlibro,idprestamo)
+VALUES(1,'',1);
+INSERT INTO DetallePrestamo(idlibro,idprestamo)
+VALUES(2,'',2);
+INSERT INTO DetallePrestamo(idlibro,idprestamo)
+VALUES(3,'',3);
+INSERT INTO DetallePrestamo(idlibro,idprestamo)
+VALUES(4,'',4);
+INSERT INTO DetallePrestamo(idlibro,idprestamo)
+VALUES(5,'',5);
