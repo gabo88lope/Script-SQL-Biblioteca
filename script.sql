@@ -137,7 +137,6 @@ CREATE TABLE prestamo (
     idusuario         NUMBER(4) NOT NULL
         CONSTRAINT fk_usuario_prestamo
             REFERENCES usuario ( idusuario ),
-    identificacion    VARCHAR2(20) NOT NULL,
     idbibliotecario   NUMBER(4) NOT NULL
         CONSTRAINT fk_bibliotecario_prestamo
             REFERENCES bibliotecario ( idbibliotecario )
@@ -250,32 +249,38 @@ INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,nume
 INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('978-99924-79-84-1','Aproximacion a la historia de Rio San Juan',TO_DATE('2013','YYYY'),'3ra edicion','Libro sobre la historia de Rio San Juan',190,1,1,2,1,900,972);
 INSERT INTO LIBRO (isbn,depositolegal,titulo,fechapublicacion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('968-422-216-5','M. 23.299-1990','BASIC Avanzado Tratamiento y diseño de archivos',TO_DATE('1990','YYYY'),'Libro sobre BASIC',333,2,6,3,000,005);
 INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('978-970-810-304-6','El Zahir',TO_DATE('2010','YYYY'),'4ta reimpresion','Libro de literatura de Paulo Coelho',352,10,2,1,1,860,863);
-INSERT INTO LIBRO (isbn,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('980-01-0024-5','Comprender la comunicacion',TO_DATE('1990','YYYY'),'4ta edicion','Libro sobre comunicacion',1,1,860,863);
+INSERT INTO LIBRO (isbn,depositolegal,titulo,fechapublicacion,edicion,descripcion,paginas,numejemplares,idubicacion,idestado,idtipodocumento,codigo,codigoespecial)VALUES('84-7888-994-9','B-51.244-2005','Harry Potter y el misterio del principe',TO_DATE('2006','YYYY'),'1ra edicion','6to libro en serie de Harry Potter',609,3,8,4,1,860,863);
+
+INSERT INTO detallelibro (idlibro,isbn,idautor,ideditorial)values(1,'980-01-0024-5',1,1);
+INSERT INTO detallelibro (idlibro,isbn,idautor,ideditorial)values(2,'980-01-0024-5',2,2);
+INSERT INTO detallelibro (idlibro,isbn,idautor,ideditorial)values(3,'980-01-0024-5',3,3);
+INSERT INTO detallelibro (idlibro,isbn,idautor,ideditorial)values(4,'980-01-0024-5',4,4);
+INSERT INTO detallelibro (idlibro,isbn,idautor,ideditorial)values(5,'980-01-0024-5',5,5);
 
 --Valores para préstamo
 INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
-VALUES(1,1, TO_DATE('12/04/2017','DD/MM/YYYY'), TO_DATE('19/04/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+VALUES(1,1, TO_DATE('12/04/2017','DD/MM/YYYY'), TO_DATE('19/04/2017','DD/MM/YYYY'), 1, 'Prestamo Vigente');
 
 INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
-VALUES(2,2, TO_DATE('18/07/2017','DD/MM/YYYY'), TO_DATE('23/07/2017','DD/MM/YYYY'), 1, 'En Prestamo');
+VALUES(2,2, TO_DATE('18/07/2017','DD/MM/YYYY'), TO_DATE('23/07/2017','DD/MM/YYYY'), 1, 'Prestamo Vigente');
 
 INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
 VALUES(3,3, TO_DATE('08/08/2017','DD/MM/YYYY'),TO_DATE('12/08/2017','DD/MM/YYYY'), 2, 'Prestamo Vencido');
 
 INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
-VALUES(4,4, TO_DATE('21/08/2017','DD/MM/YYYY'), TO_DATE('25/08/2017','DD/MM/YYYY'), 3, 'En Prestamo');
+VALUES(4,4, TO_DATE('21/08/2017','DD/MM/YYYY'), TO_DATE('25/08/2017','DD/MM/YYYY'), 3, 'Prestamo Vigente');
 
 INSERT INTO prestamo (idusuario, idbibliotecario, fechaprestamo, fechadevolucion, cantidad, estado)
-VALUES(5,1, TO_DATE('17/10/2017','DD/MM/YYYY'), TO_DATE('23/10/2017','DD/MM/YYYY'), 1, 'Prestamo Vencido');
+VALUES(5,1, TO_DATE('17/10/2017','DD/MM/YYYY'), TO_DATE('23/10/2017','DD/MM/YYYY'), 1, 'Prestamo Finalizado');
 
 --Valores para detalle_préstamo
 INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
-VALUES(1,'',1);
+VALUES(1,'980-01-0024-5',1);
 INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
-VALUES(2,'',2);
+VALUES(2,'978-99924-79-84-1',2);
 INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
-VALUES(3,'',3);
+VALUES(3,'968-422-216-5',3);
 INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
-VALUES(4,'',4);
+VALUES(4,'978-970-810-304-6',4);
 INSERT INTO DetallePrestamo(idlibro,Isbn,idprestamo)
-VALUES(5,'',5);
+VALUES(5,'84-7888-994-9',5);
