@@ -5,9 +5,6 @@
 -- Universidad Centroamericana ISI
 
 -- Tabla Ubicación
-
-
-
 CREATE TABLE ubicacion (
     idubicacion   SMALLINT AUTO_INCREMENT,
     CONSTRAINT pk_ubicacion PRIMARY KEY ( idubicacion ),
@@ -108,16 +105,16 @@ CREATE TABLE libro (
     idubicacion        SMALLINT NOT NULL,
         CONSTRAINT fk_ubicacion_libro FOREIGN KEY (idubicacion)
             REFERENCES ubicacion ( idubicacion ),
-    idestado           DECIMAL(2) NOT NULL,
+    idestado           TINYINT NOT NULL,
         CONSTRAINT fk_estado_libro FOREIGN KEY (idestado)
             REFERENCES estado ( idestado ),
-    idtipodocumento    DECIMAL(3) NOT NULL,
+    idtipodocumento    TINYINT NOT NULL,
         CONSTRAINT fk_tipodocumento_libro FOREIGN KEY (idtipodocumento)
             REFERENCES tipodocumento ( idtipodocumento ),
-    codigogeneral             DECIMAL(3) NOT NULL,
+    codigogeneral      SMALLINT NOT NULL,
         CONSTRAINT fk_codigogeneral_libro FOREIGN KEY (codigogeneral)
             REFERENCES categoriageneral ( codigogeneral ),
-    codigoespecial     DECIMAL(3) NOT NULL,
+    codigoespecial     SMALLINT NOT NULL,
         CONSTRAINT fk_codigoespecial_libro FOREIGN KEY (codigoespecial)
             REFERENCES categoriaespecial ( codigoespecial )
 );
@@ -130,10 +127,10 @@ CREATE TABLE prestamo (
     fechadevolucion   DATETIME NOT NULL,
     cantidad          TINYINT NOT NULL,
     estado            VARCHAR(20) NOT NULL,
-    idusuario         SMALLINT NOT NULL,
+    idusuario         INT NOT NULL,
         CONSTRAINT fk_usuario_prestamo FOREIGN KEY (idusuario)
             REFERENCES usuario ( idusuario ),
-    idbibliotecario   DECIMAL(4) NOT NULL,
+    idbibliotecario   SMALLINT NOT NULL,
         CONSTRAINT fk_bibliotecario_prestamo FOREIGN KEY (idbibliotecario)
             REFERENCES bibliotecario ( idbibliotecario )
 );
@@ -148,7 +145,7 @@ CREATE TABLE detallelibro (
     idautor          INT NOT NULL,
         CONSTRAINT fk_autor_detallelibro FOREIGN KEY (idautor)
             REFERENCES autor ( idautor ),
-    ideditorial      DECIMAL(3) NOT NULL,
+    ideditorial      SMALLINT NOT NULL,
         CONSTRAINT fk_editorial_detallelibro FOREIGN KEY (ideditorial)
             REFERENCES editorial ( ideditorial )
 );
@@ -160,7 +157,7 @@ CREATE TABLE detalleprestamo (
     idprestamo          INT NOT NULL,
         CONSTRAINT fk_detalleprestamo_prestamo FOREIGN KEY (idprestamo)
             REFERENCES prestamo ( idprestamo ),
-    idlibro             DECIMAL(6) NOT NULL,
+    idlibro             INT NOT NULL,
     CONSTRAINT fk_libro_detalleprestamo FOREIGN KEY ( idlibro )
         REFERENCES libro ( idlibro )
 );
@@ -278,3 +275,4 @@ INSERT INTO detalleprestamo(idlibro,idprestamo)
 VALUES(4,4);
 INSERT INTO detalleprestamo(idlibro,idprestamo)
 VALUES(5,5);
+
